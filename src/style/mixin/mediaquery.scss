@@ -1,0 +1,37 @@
+// media query settings
+
+/**
+.selector {
+
+  @include tablet {
+    background: $prmCol;
+  };
+
+  @include mobile {
+    background: url("./assets/images/bg_pattern.png") repeat;
+  };
+}
+*/
+
+$desktop-width:1024px;
+$desktop-max: 1300px;
+$tablet-width:768px;
+$mobile-width:480px;
+
+@mixin mobile {
+  @media (max-width: #{$tablet-width - 1px}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: #{$tablet-width}) and (max-width: #{$desktop-width - 1px}) {
+    @content;
+  }
+}
+
+@mixin limDesktop {
+  @media (min-width: #{$desktop-max}) {
+    @content;
+  }
+}

@@ -1,0 +1,18 @@
+@import 'src/style/mixin.scss';
+* {
+  box-sizing: border-box;
+}
+body {
+  overflow-x: hidden;
+}
+// body {
+//   @include iphone6plus {
+//     background: #efefef;
+//   }
+//   @include iphone6 {
+//     background: darken(#efefef, 20%);
+//   }
+//   @include iphone5 {
+//     background: darken(#efefef, 40%);
+//   }
+// }
