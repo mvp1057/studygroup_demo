@@ -1,21 +1,4 @@
 (function ($) {
-  var $uiWrapper = $('[data-uipack="tabUi_ex1"]');
-  var $tab = $uiWrapper.find('ul li');
-  var $panel = $uiWrapper.find('.panel');
-
-  $tab.each(function (i) {
-    $(this).on('click', function () {
-      $tab.removeClass('active');
-      $(this).addClass('active');
-
-      $panel.hide();
-      $panel.eq(i).show();
-    });
-  });
-}(jQuery));
-
-
-(function ($) {
   var $uiWrapper = $('[data-uipack="tabUi"]');
 
   function eventHandler(e) {

@@ -20,42 +20,20 @@
 <body>
   <div class="pageLayout">
     <h1>Tab UI</h1>
-
     <section class="pageSection">
-      <h2>Example1</h2>
-      <div class="tabUiStyle" data-uipack="tabUi_ex1">
-        <ul class="tablist" role="tablist">
-          <li class="tab active" role="tab">Intro</li>
-          <li class="tab" role="tab">About</li>
-        </ul>
-        <div class="panel active" role="tabpanel">
-          <h2>ARIA Tab Panel Example</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa velit deserunt accusantium, id quae magnam, voluptates officiis tenetur eos optio commodi qui blanditiis nemo illum, dolorum. Odit neque consequuntur, ullam!
-          </p>
-        </div>
-        <div class="panel" role="tabpanel">
-          <h2>About</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam qui veritatis enim suscipit quisquam laboriosam aperiam eveniet voluptate assumenda quae distinctio, tenetur, exercitationem at possimus, ipsam expedita deserunt laudantium voluptas!
-          </p>
-        </div>
-      </div>
-
-      <h2 class="mt40">Example2</h2>
       <div class="tabUiStyle" data-uipack="tabUi">
         <ul class="tablist" role="tablist">
-          <li id="toIntro" role="tab" aria-selected="true">Intro</li>
-          <li id="toAbout" role="tab" aria-selected="false">About</li>
+          <li id="tabBtn1" role="tab" aria-controls="panel1" aria-selected="true">TabBtn1</li>
+          <li id="tabBtn2" role="tab" aria-controls="panel2" aria-selected="false">TabBtn2</li>
         </ul>
-        <div aria-labelledby="toIntro" role="tabpanel" aria-hidden="false">
-          <h2>ARIA Tab Panel Example</h2>
+        <div id="panel1" role="tabpanel" aria-labelledby="tabBtn1" aria-hidden="false">
+          <h3>Panel 1</h3>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa velit deserunt accusantium, id quae magnam, voluptates officiis tenetur eos optio commodi qui blanditiis nemo illum, dolorum. Odit neque consequuntur, ullam!
           </p>
         </div>
-        <div aria-labelledby="toAbout" role="tabpanel" aria-hidden="true">
-          <h2>About</h2>
+        <div id="panel2" role="tabpanel" aria-labelledby="tabBtn2" aria-hidden="true">
+          <h3>Panel 2</h3>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam qui veritatis enim suscipit quisquam laboriosam aperiam eveniet voluptate assumenda quae distinctio, tenetur, exercitationem at possimus, ipsam expedita deserunt laudantium voluptas!
           </p>
