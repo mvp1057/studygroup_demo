@@ -1,14 +1,29 @@
 (function ($) {
-  var $uiWrapper = $('[data-uipack="tabUi"]');
-
   function eventHandler(e) {
     var $eTarget = $(e.currentTarget);
-    var targetID = $eTarget.attr('id');
-    var $targetPanel = $eTarget.closest($uiWrapper).find('[aria-labelledby="' + targetID + '"]');
+    var $targetPanel = $('[aria-labelledby="' + $eTarget.attr('id') + '"]');
 
-    $eTarget.attr('aria-selected', true).siblings('[role="tab"]').attr('aria-selected', false);
-    $targetPanel.attr('aria-hidden', false).siblings('[role="tabpanel"]').attr('aria-hidden', true);
+    // 조건문으로 이벤트 구분
+    if (e.type === 'click') { // 클릭시 동작
+      $eTarget
+        .attr('aria-selected', true)
+        .addClass('active')
+        .siblings('[role="tab"]')
+        .attr('aria-selected', false)
+        .removeClass('active');
+
+      $targetPanel
+        .attr('aria-hidden', false)
+        .addClass('active')
+        .siblings('[role="tabpanel"]')
+        .attr('aria-hidden', true)
+        .removeClass('active');
+    } else if (e.type === 'keydown' && e.which === 13) { // 키가 눌렸을때 && 키가 엔터일떄
+      // e.which 는 keycode 값을 판별하는데 13 이 엔터키에 해당되는 keycode
+      $(this).click(); // 현재 엘리멘트에 클릭이벤트 발생시킴
+    }
   }
 
-  $uiWrapper.find('[role="tab"]').on('click', eventHandler);
+  // 바인딩에 keydown 이벤트 추가 - 쉼표 없음
+  $('[role="tab"]').on('click keydown', eventHandler);
 }(jQuery));

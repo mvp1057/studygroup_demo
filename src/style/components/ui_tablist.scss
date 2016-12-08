@@ -1,59 +1,39 @@
 @import 'src/style/mixin.scss';
+// var
+$activeClass: active;
+
+// common
 %active {
-  background: gray;
-  color: #fff;
+  background: $gray-dark;
+  color: $white;
 }
 
-// ui layout
-.tabUiStyle {
-  // tablist
+// root element
+[data-uipack='ui-tabpanel'].uipack_theme {
+  box-sizing: border-box;
+  width: 100%;
   [role='tablist'] {
-    [role="tab"] {
-      cursor: pointer;
-      &[aria-selected='true'],
-      &.active {
-        @extend %active;
-      }
+    overflow: hidden;
+  }
+  [role='tab'] {
+    float: left;
+    padding: 5px 10px;
+    cursor: pointer;
+    &[aria-selected='true'],
+    &.#{$activeClass} {
+      @extend %active
     }
   }
-
-  // tabpanel
   [role='tabpanel'] {
+    display:none;
+    padding: 5px 10px;
     min-height: 200px;
-    &[aria-hidden='true'],
-    &.hidden {
-      display: none;
-    }
-  }
+    background: $gray-light;
+    border: 1px solid $gray-dark;
 
-  // older browser
-  .panel {
-    display: none;
-    &.active {
+    &[aria-hidden='false'],
+    &.#{$activeClass} {
       display: block;
     }
-  }
-}
-
-// ui styling
-.tabUiStyle {
-  [role='tablist'] {
-    &:after {
-      content: '';
-      display: block;
-      clear: both;
-    }
-
-    [role='tab'] {
-      float: left;
-      padding: 5px 10px;
-      background: #fff;
-    }
-  }
-
-  [role='tabpanel'] {
-    padding: 10px 20px;
-    background: #efefef;
-    border: 1px solid lighten(gray, 20%);
   }
 }

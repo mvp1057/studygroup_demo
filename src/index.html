@@ -19,23 +19,32 @@
 
 <body>
   <div class="pageLayout">
-    <h1>Tab UI</h1>
     <section class="pageSection">
-      <div class="tabUiStyle" data-uipack="tabUi">
-        <ul class="tablist" role="tablist">
-          <li id="tabBtn1" role="tab" aria-controls="panel1" aria-selected="true">TabBtn1</li>
-          <li id="tabBtn2" role="tab" aria-controls="panel2" aria-selected="false">TabBtn2</li>
+      <h1>Tab &amp; Panel UI</h1>
+      <div class="uipack_theme" data-uipack="ui-tabpanel">
+        <ul role="tablist">
+        	<li id="tab1" role="tab" class="active" aria-controls="panel1" aria-selected="true" tabindex="0">TAB 1</li>
+          <li id="tab2" role="tab" aria-controls="panel2" aria-selected="false" tabindex="0">TAB 2</li>
+        	<li id="tab3" role="tab" aria-controls="panel3" aria-selected="false" tabindex="0">TAB 3</li>
         </ul>
-        <div id="panel1" role="tabpanel" aria-labelledby="tabBtn1" aria-hidden="false">
-          <h3>Panel 1</h3>
+        <!-- panel1 -->
+        <div id="panel1" role="tabpanel" class="active" aria-labelledby="tab1" aria-hidden="false">
+        	<h3>PANEL 1</h3>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa velit deserunt accusantium, id quae magnam, voluptates officiis tenetur eos optio commodi qui blanditiis nemo illum, dolorum. Odit neque consequuntur, ullam!
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure aperiam, magni provident ad hic blanditiis numquam voluptas dolores vel quas itaque ratione facilis tempora consectetur repellendus. Consequuntur aperiam explicabo voluptatum!
           </p>
         </div>
-        <div id="panel2" role="tabpanel" aria-labelledby="tabBtn2" aria-hidden="true">
-          <h3>Panel 2</h3>
+        <!-- panel2 -->
+        <div id="panel2" role="tabpanel" aria-labelledby="tab2" aria-hidden="true">
+        	<h3>PANEL 2</h3>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam qui veritatis enim suscipit quisquam laboriosam aperiam eveniet voluptate assumenda quae distinctio, tenetur, exercitationem at possimus, ipsam expedita deserunt laudantium voluptas!
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto nemo fugiat quod laborum quos unde dolore accusantium quae eaque, quidem ad laudantium ea cum omnis voluptatem alias similique. Expedita, saepe!
+          </p>
+        </div>
+        <div id="panel3" role="tabpanel" aria-labelledby="tab3" aria-hidden="true">
+        	<h3>PANEL 3</h3>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae pariatur facilis, minus modi delectus non sequi est vero exercitationem asperiores blanditiis culpa, perspiciatis harum libero. Officia harum sequi vero adipisci.
           </p>
         </div>
       </div>
