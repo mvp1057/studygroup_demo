@@ -2,8 +2,10 @@
 // base setting
 @import './lib/reset.scss';
 @import './lib/fonts.scss';
-// libraries
-// @import './lib/fontawesome/font-awesome.scss';
-// component
+
+// layout
 @import './components/layout.scss';
+
+// components
 @import './components/ui_tablist.scss';
+@import './components/ui_carousel.scss';

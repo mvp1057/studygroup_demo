@@ -9,7 +9,7 @@ $activeClass: active;
 }
 
 // root element
-[data-uipack='ui-tabpanel'].uipack_theme {
+.ui_tabpanel.theme_default {
   box-sizing: border-box;
   width: 100%;
   [role='tablist'] {

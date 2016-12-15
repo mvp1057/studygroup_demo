@@ -61,6 +61,10 @@ button {
   cursor: pointer;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 @font-face {
   font-family: 'NanumGothic';
   font-style: normal;
@@ -104,7 +108,7 @@ body {
 }
 
 .pageLayout {
-  width: 800px;
+  width: 600px;
   margin: 0 auto;
   color: #272727;
 }
@@ -129,27 +133,27 @@ body {
   margin-top: 0;
 }
 
-[data-uipack='ui-tabpanel'].uipack_theme [role='tab'][aria-selected='true'], [data-uipack='ui-tabpanel'].uipack_theme [role='tab'].active {
+.ui_tabpanel.theme_default [role='tab'][aria-selected='true'], .ui_tabpanel.theme_default [role='tab'].active {
   background: gray;
   color: #fff;
 }
 
-[data-uipack='ui-tabpanel'].uipack_theme {
+.ui_tabpanel.theme_default {
   box-sizing: border-box;
   width: 100%;
 }
 
-[data-uipack='ui-tabpanel'].uipack_theme [role='tablist'] {
+.ui_tabpanel.theme_default [role='tablist'] {
   overflow: hidden;
 }
 
-[data-uipack='ui-tabpanel'].uipack_theme [role='tab'] {
+.ui_tabpanel.theme_default [role='tab'] {
   float: left;
   padding: 5px 10px;
   cursor: pointer;
 }
 
-[data-uipack='ui-tabpanel'].uipack_theme [role='tabpanel'] {
+.ui_tabpanel.theme_default [role='tabpanel'] {
   display: none;
   padding: 5px 10px;
   min-height: 200px;
@@ -157,8 +161,62 @@ body {
   border: 1px solid gray;
 }
 
-[data-uipack='ui-tabpanel'].uipack_theme [role='tabpanel'][aria-hidden='false'], [data-uipack='ui-tabpanel'].uipack_theme [role='tabpanel'].active {
+.ui_tabpanel.theme_default [role='tabpanel'][aria-hidden='false'], .ui_tabpanel.theme_default [role='tabpanel'].active {
   display: block;
+}
+
+.ui_tabpanel.theme_default [role='tab'][aria-selected='true'], .ui_tabpanel.theme_default [role='tab'].active {
+  background: gray;
+  color: #fff;
+}
+
+.ui_carousel.theme_default [aria-hidden='true'] {
+  display: none;
+}
+
+.ui_carousel.theme_default .carousel {
+  width: 100%;
+  border: 1px solid gray;
+}
+
+.ui_carousel.theme_default .innerFrame .frame {
+  background: #efefef;
+  min-height: 200px;
+}
+
+.ui_carousel.theme_default .innerFrame .frame:nth-child(2) {
+  background: #d6d6d6;
+}
+
+.ui_carousel.theme_default .innerFrame .frame:nth-child(3) {
+  background: #bcbcbc;
+}
+
+.ui_carousel.theme_default .innerFrame .frame:nth-child(4) {
+  background: #a3a3a3;
+}
+
+.ui_carousel.theme_default fieldset.ctrls {
+  margin-top: 10px;
+  vertical-align: middle;
+  text-align: left;
+  font-size: 0;
+}
+
+.ui_carousel.theme_default fieldset.ctrls button {
+  display: inline-block;
+  margin-left: 5px;
+  padding: 0 10px;
+  font-size: 14px;
+  line-height: 1.4em;
+  background: gray;
+  border: 1px solid #b3b3b3;
+  border-radius: 3px;
+  color: #fff;
+}
+
+.ui_carousel.theme_default fieldset.ctrls button:first-child {
+  margin-left: 0;
 }
 
 /*# sourceMappingURL=client.css.map */

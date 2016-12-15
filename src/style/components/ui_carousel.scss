@@ -1,0 +1,57 @@
+@import 'src/style/mixin.scss';
+// var
+$activeClass: active;
+
+// common
+%active {
+  background: $gray-dark;
+  color: $white;
+}
+
+.ui_carousel.theme_default {
+  [aria-hidden='true'] {
+    display: none;
+  }
+  .carousel {
+    width: 100%;
+    border: 1px solid $gray-dark;
+  }
+
+  .innerFrame {
+    .frame {
+      background: $gray-light;
+      min-height: 200px;
+      &:nth-child(2) {
+        background: darken($gray-light, 10%);
+      }
+      &:nth-child(3) {
+        background: darken($gray-light, 20%);
+      }
+      &:nth-child(4) {
+        background: darken($gray-light, 30%);
+      }
+    }
+  }
+
+  // controls
+  fieldset.ctrls {
+    margin-top: 10px;
+    vertical-align: middle;
+    text-align: left;
+    font-size: 0;
+    button {
+      display: inline-block;
+      margin-left: 5px;
+      padding: 0 10px;
+      font-size: 14px;
+      line-height: 1.4em;
+      background: $gray-dark;
+      border: 1px solid lighten($gray-dark, 20%);
+      border-radius: 3px;
+      color: $white;
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+  }
+}

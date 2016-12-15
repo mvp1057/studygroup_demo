@@ -19,9 +19,42 @@
 
 <body>
   <div class="pageLayout">
+    <h1>ARIA-UI Examples</h1>
+    <h2>Baseline Rules</h2>
+    <ol>
+      <li>1. Alert users about element's' Role. If its not specified</li>
+      <li>2. Alert users about element's Property and it's important relations</li>
+      <li>3. Alert users about element's State</li>
+      <li>4. Alert users when there's a change in state</li>
+      <li>5. Support keyboard accessibility</li>
+    </ol>
     <section class="pageSection">
-      <h1>Tab &amp; Panel UI</h1>
-      <div class="uipack_theme" data-uipack="ui-tabpanel">
+      <h2>Carousel</h2>
+      <div class="ui_carousel theme_default" data-uipack="ui_carousel">
+        <div id="carousel" class="carousel" aria-live="polite">
+          <ul class="innerFrame">
+            <li class="frame" aria-hidden="false">
+              item1
+            </li>
+            <li class="frame" aria-hidden="true">
+              item2
+            </li>
+            <li class="frame" aria-hidden="true">
+              item3
+            </li>
+          </ul>
+        </div>
+        <fieldset class="ctrls" aria-controls="carousel">
+          <button value="prev" aria-label="previous">&lt;&lt;</button>
+          <button value="play" aria-label="play">Play</button>
+          <button value="pause" aria-label="pause">||</button>
+          <button value="next" aria-label="next">&gt;&gt;</button>
+        </fieldset>
+      </div>
+    </section>
+    <section class="pageSection">
+      <h2>Tab &amp; Panel UI</h2>
+      <div class="ui_tabpanel theme_default" data-uipack="ui_tabpanel">
         <ul role="tablist">
         	<li id="tab1" role="tab" class="active" aria-controls="panel1" aria-selected="true" tabindex="0">TAB 1</li>
           <li id="tab2" role="tab" aria-controls="panel2" aria-selected="false" tabindex="0">TAB 2</li>
@@ -49,6 +82,7 @@
         </div>
       </div>
     </section>
+
   </div>
 
   <!-- build:js js/client.min.js -->
