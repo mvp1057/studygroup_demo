@@ -132,15 +132,229 @@ if (typeof Array.prototype.forEach !== 'function') {
     }
   }
 
-  if ($container.length) {
-    // bind event
-    $controllers.find('button').on('click', eventHandler);
-    $container.find('.innerFrame').on('mouseenter mouseleave', eventHandler);
+  // if ($container.length) {
+  //   // bind event
+  //   $controllers.find('button').on('click', eventHandler);
+  //   $container.find('.innerFrame').on('mouseenter mouseleave', eventHandler);
 
-    // fire auto roll
-    controller();
-  }
+  //   // fire auto roll
+  //   controller();
+  // }
 }(jQuery));
+
+(function ($, doc) {
+  var $container = $('[data-uipack="ui_carousel"]');
+  var selector = doc.querySelectorAll('.carousel');
+  var carousels = [];
+
+  // constructor
+  function Carousel(element) {
+    this.id = element.getAttribute('id');
+    this.element = element;
+    this.liveIdx = $(element).find('.frame[aria-hidden="false"]').index();
+    this.maxIdx = $(element).find('.frame').size() - 1;
+    this.interval = 3000;
+    this.auto = undefined;
+  }
+
+  Carousel.prototype = {
+    // TODO: add method to modify this
+    render: function () {
+      $(this.element).find('.frame').attr('aria-hidden', true);
+      $(this.element).find('.frame').eq(this.liveIdx).attr('aria-hidden', false);
+    },
+
+    update: function (type) {
+      if (type === 'increment') {
+        if (this.liveIdx < this.maxIdx) {
+          this.liveIdx += 1;
+        } else {
+          this.liveIdx = 0;
+        }
+      } else if (type === 'decrement') {
+        if (this.liveIdx <= 0) {
+          this.liveIdx = this.maxIdx;
+        } else {
+          this.liveIdx -= 1;
+        }
+      }
+
+      this.render();
+    }
+  };
+
+  /**
+   * action types
+   *
+   * @param {Object} carousel
+   * @param {String} actionName
+   */
+  function actions(carousel, actionName) {
+    var param = carousel;
+
+    // clearInterval on fire
+    clearInterval(param.auto);
+    switch (actionName) {
+      case 'prev':
+        param.update('decrement');
+        break;
+
+      case 'next':
+        param.update('increment');
+        break;
+
+      case 'pause':
+        clearInterval(param.auto);
+        break;
+
+      case 'play':
+      default:
+        param.auto = setInterval(function () {
+          param.update('increment');
+        }, param.interval);
+        break;
+    }
+  }
+
+  /**
+   * Event handler
+   *
+   * @param {Object} event
+   */
+  function eventHandler(event) {
+    var carouselObj = event.data.carousel;
+    var actionName = event.target.value;
+
+    if (event.type === 'mouseenter') {
+      actions(carouselObj, 'pause');
+    } else if (event.type === 'mouseleave') {
+      actions(carouselObj, 'play');
+    } else {
+      actions(carouselObj, actionName);
+    }
+  }
+
+  // init
+  function init() {
+    var i;
+    for (i = 0; i < $container.length; i++) {
+      // create Carousel obj
+      carousels[i] = new Carousel(selector[i]);
+
+      // bind event
+      $container.find('[aria-controls="' + carousels[i].id + '"]').find('button').on('click', {
+        carousel: carousels[i],
+      }, eventHandler);
+
+      // add event on carousels area
+      $container.find('#' + carousels[i].id).on('mouseenter mouseleave', {
+        carousel: carousels[i]
+      }, eventHandler);
+
+      // auto roll on init
+      actions(carousels[i], 'play');
+    }
+  }
+
+  // run
+  if ($container.length) {
+    init();
+  }
+}(jQuery, document));
+
+(function ($, doc, win) {
+  var $window = $(win);
+  var selector = doc.querySelectorAll('[data-trigger="scroll"]');
+  var elements = [];
+  var options = {
+    debug: false,
+    topPadding: 0,
+    botPadding: 0,
+  };
+  var SCROLL_TOP;
+
+    // contstructor
+  function Detector(element) {
+    this.element = element;
+    this.elementTop = this.element.getBoundingClientRect().top + $window.scrollTop();
+    this.elementBottom = this.elementTop + $(this.element).outerHeight() - options.botPadding;
+    this.triggerPosition = this.getTriggerPosition();
+    this.isActive = false;
+  }
+
+    // common method
+  Detector.prototype = {
+    getTriggerPosition: function () {
+      var center = $(win).height() / 2 + options.topPadding;
+      var elementH = $(this.element).height() / 2;
+
+      return this.elementTop - (center - elementH);
+    },
+
+    update: function () {
+      var currentState = this.isActive;
+            // update isActive
+      if (SCROLL_TOP >= this.triggerPosition && SCROLL_TOP <= this.elementBottom) {
+        this.isActive = true;
+      } else {
+        this.isActive = false;
+      }
+
+            // NOTE: event publisher
+      if (this.isActive != currentState) {
+        CL.events.emit('SCROLL_TRIGGER', {
+          el: this.element,
+          active: this.isActive,
+        });
+      }
+
+            // update DOM attr
+      this.element.setAttribute('data-live', this.isActive);
+    },
+  };
+
+    // window event listener
+  function eventHandler(e) {
+        // update scrollTOP
+    SCROLL_TOP = $window.scrollTop();
+
+        // update scrolltop
+    switch (e.type) {
+      default: // on load
+      case 'scroll':
+                // update Detector
+        for (var i = 0; i < elements.length; i++) {
+          elements[i].update();
+        }
+        break;
+
+      case 'resize':
+        for (var i = 0; i < elements.length; i++) {
+          elements[i].triggerPosition = elements[i].getTriggerPosition();
+        }
+        break;
+    }
+  }
+
+    // init function
+  function init() {
+        // create an array of element objects
+    for (var i = 0; i < selector.length; i++) {
+      elements.push(new Detector(selector[i]));
+            // set DOM attr
+      elements[i].element.setAttribute('data-live', elements[i].isActive);
+    }
+
+        // bind event
+    $window.on('load scroll resize', eventHandler);
+
+        // debugging
+    if (options.debug) console.log(elements);
+  }
+
+    // init
+  if (selector.length) init();
+}(jQuery, document, window));
 
 (function ($) {
   function eventHandler(e) {

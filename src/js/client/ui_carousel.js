@@ -82,12 +82,12 @@
     }
   }
 
-  if ($container.length) {
-    // bind event
-    $controllers.find('button').on('click', eventHandler);
-    $container.find('.innerFrame').on('mouseenter mouseleave', eventHandler);
+  // if ($container.length) {
+  //   // bind event
+  //   $controllers.find('button').on('click', eventHandler);
+  //   $container.find('.innerFrame').on('mouseenter mouseleave', eventHandler);
 
-    // fire auto roll
-    controller();
-  }
+  //   // fire auto roll
+  //   controller();
+  // }
 }(jQuery));
